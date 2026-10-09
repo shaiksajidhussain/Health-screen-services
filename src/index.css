@@ -1,0 +1,137 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap");
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background-color: #F5F4F0;
+    color: #0f172a; /* slate-900 */
+    font-family: "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+html.dark body {
+  background-color: #383838;
+  color: #f8fafc; /* slate-50 */
+}
+
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes gradientMove {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@layer utilities {
+  .animate-floaty {
+    animation: floaty 8s ease-in-out infinite;
+  }
+
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradientMove 10s ease-in-out infinite;
+  }
+
+  .animate-fadeSlideIn {
+    animation: fadeSlideIn 240ms ease-out both;
+  }
+
+  .animate-softPulse {
+    animation: softPulse 900ms ease-out infinite;
+  }
+
+  .reveal-up {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  .reveal-up.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 700ms ease, transform 700ms ease;
+  }
+
+  .shine-hover {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shine-hover::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(
+      120deg,
+      transparent 18%,
+      rgba(56, 189, 248, 0.28) 36%,
+      rgba(167, 139, 250, 0.28) 54%,
+      rgba(236, 72, 153, 0.28) 72%,
+      transparent 92%
+    );
+    transform: translateX(-120%);
+    transition: transform 500ms ease;
+    pointer-events: none;
+  }
+
+  .shine-hover:hover::before {
+    transform: translateX(120%);
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .font-dm-sans {
+    font-family: "DM Sans", "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes softPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
